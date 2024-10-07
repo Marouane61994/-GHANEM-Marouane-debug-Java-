@@ -1,4 +1,5 @@
 package com.hemebiotech.analytics;
+
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Map;
@@ -8,8 +9,9 @@ import java.util.Map;
  */
 public interface ISymptomWriter {
     /**
-     Writes all treated data on a file
-     @param symptoms the map of sorted data
+     * Writes all treated data on a file
+     *
+     * @param symptoms the map of sorted data
      */
     default void writeSymptoms(Map<String, Integer> symptoms) {
         try {
