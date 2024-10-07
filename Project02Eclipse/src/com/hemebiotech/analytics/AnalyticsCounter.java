@@ -1,19 +1,32 @@
 package com.hemebiotech.analytics;
+import java.util.*;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
 
 public class AnalyticsCounter {
+	/**
+	 * Main class of feature Analytics counter
+	 */
 	public AnalyticsCounter() {
 	}
+
+	/**
+	 * Reads and adds all symptom from file on a list
+	 *
+	 * @return a symptom's list
+	 */
+
 	public List<String> getSymptoms(String filepath) {
 		ISymptomReader reader = new ReadSymptomDataFromFile(filepath);
 		return reader.getSymptoms();
 	}
+
+	/**
+	 * Sorts alphabetically the list of symptoms and CountSymptoms counts the occurrences of each existing symptom
+	 *
+	 * @param symptoms list of all symptoms to sort
+	 * @return map of sorted symptoms
+	 */
+
 	public Map<String, Integer> countSymptoms(List<String> symptoms) {
 		Map<String, Integer> map = new TreeMap<>();
 		for (String symptom : symptoms) {
@@ -28,40 +41,28 @@ public class AnalyticsCounter {
 		return map;
 
 	}
+
+	/**
+	 * Writes all treated data on a file
+	 *
+	 * @param symptoms the map of sorted data
+	 */
 	public void writeSymptoms(Map<String, Integer> symptoms) {
 		ISymptomWriter writer = new WriteSymptomDataToFile("result.out");
 		writer.writeSymptoms(symptoms);
 	}
 
-	public static void main(String args[]) throws Exception {
-		// first get input
-		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
-		String line = reader.readLine();
+	/**
+	 * Main method
+	 *
+	 * @param args no param
+	 */
+	public static void main(String[] args) {
 
-		int i = 0;
-		int headCount = 0;	// counts headaches
-		while (line != null) {
-			i++;
-			System.out.println("symptom from file: " + line);
-			if (line.equals("headache")) {
-				headCount++;
-				System.out.println("number of headaches: " + headCount);
-			}
-			else if (line.equals("rush")) {
-				//++;
-			}
-			else if (line.contains("pupils")) {
-				//pupilCount++;
-			}
+		AnalyticsCounter counter = new AnalyticsCounter();
+		List<String> symptoms = counter.getSymptoms("symptoms.txt");
+		Map<String, Integer> map = counter.countSymptoms(symptoms);
+		counter.writeSymptoms(map);
 
-			line = reader.readLine();	// get another symptom
-		}
-		
-		// next generate output
-		FileWriter writer = new FileWriter ("result.out");
-		//.write("headache: " + headacheCount + "\n");
-		//writer.write("rash: " + rashCount + "\n");
-		//writer.write("dialated pupils: " + pupilCount + "\n");
-		writer.close();
 	}
 }
