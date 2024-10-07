@@ -6,10 +6,9 @@ package com.hemebiotech.analytics;
  */
 public class WriteSymptomDataToFile implements ISymptomWriter {
     /**
-     * The ignoredResultOut of the output file
-     */
-    public WriteSymptomDataToFile(String ignoredResultOut) {
-    }
+     Constructs an object for store symptom's data
+     @param ignoredResultOut the filepath for create a output file
+     */    public WriteSymptomDataToFile(String ignoredResultOut) {}
 
 
 }
