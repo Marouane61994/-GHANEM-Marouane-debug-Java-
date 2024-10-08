@@ -6,17 +6,13 @@ import java.util.*;
  * Main class of feature Analytics counter
  */
 public class AnalyticsCounter {
-    /**
-     * Main class of feature Analytics counter
-     */
-    public AnalyticsCounter() {
-    }
+
 
     /**
      * Reads and adds all symptom from file on a list
      *
-     * @return a symptom's list
      * @param filepath the filepath of input file
+     * @return a symptom's list
      */
 
     public List<String> getSymptoms(String filepath) {
